@@ -2,14 +2,14 @@ import numpy
 import pyaudio
 import analyse
 
-pyaud = pyaudio.pyAudio()
+pyaud = pyaudio.PyAudio()
 
 #open input stream 
 stream = pyaud.open(
 	format = pyaudio.paInt16, #16 bit
 	channels = 1, #mono
 	rate = 44100, #at 44100 Hz
-	input device_index = 2, #this number should be whichever USB port the microphone is plugged in to
+	input_device_index = 1, #whichever USB port the microphone is plugged in to
 	input = True)
 	
 while True:
