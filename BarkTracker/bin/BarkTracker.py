@@ -18,7 +18,7 @@ while True:
 	#convert to NumPy array
 	samps = numpy.fromstring(rawsamps, dtype = numpy.int16)
 	#output to user
-	print analyse.loudness(samps), analyse.musical_detect_pitch(samps)
+	#print analyse.loudness(samps), analyse.musical_detect_pitch(samps)
 	
 	if analyse.loudness(samps) > -10:
 		print "Too Loud!"
