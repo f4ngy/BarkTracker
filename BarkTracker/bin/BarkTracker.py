@@ -20,7 +20,7 @@ while True:
 	#output to user
 	#print analyse.loudness(samps), analyse.musical_detect_pitch(samps)
 	
-	if analyse.loudness(samps) > -10:
+	if analyse.loudness(samps) > -25:
 		print "Too Loud!"
 	
 	elif analyse.loudness(samps) > -30:
