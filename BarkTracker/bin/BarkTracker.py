@@ -23,5 +23,5 @@ while True:
 	if analyse.loudness(samps) > -10:
 		print "Too Loud!"
 	
-	else if analyse.loudness(samps) > -30:
+	elif analyse.loudness(samps) > -30:
 		print "Normal Ambient Sound"	
