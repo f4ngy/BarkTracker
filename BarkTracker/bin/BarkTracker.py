@@ -8,6 +8,10 @@ import smtplib # for emailing people
 
 pyaud = pyaudio.PyAudio()
 
+gmailUser = 'barktracker@gmail.com'
+gmailPassword = 'BarkBarkBark'
+recipient = 'lle6138@rit.edu'
+
 #open input stream 
 stream = pyaud.open(
 	format = pyaudio.paInt16, #16 bit
@@ -28,9 +32,9 @@ while True:
 		print ("Too Loud!")
 		
 		#Setup email stuff
-		FROM = "BARK TRACKER" #This might need to be an email address. We will soon se
+		FROM = gmailUser
 
-		TO = ["lle6138@rit.edu"] #must be a list
+		TO = [recipient] #must be a list
 		
 		SUBJECT = "Noisy dog"
 		
@@ -47,9 +51,17 @@ while True:
 		"""%(FROM, ", ".join(TO), SUBJECT, TEXT)
 		
 		#send mail
-		server = smtplib.SMTP('myserver')
-		server.sendmail(FROM, TO, message)
-		server.quit()
+		#server = smtplib.SMTP('')
+		#server.sendmail(FROM, TO, message)
+		#server.quit()
+		
+		mailServer = smtplib.SMTP('smtp.gmail.com', 587)
+  		mailServer.ehlo()
+  		mailServer.starttls()
+  		mailServer.ehlo()
+  		mailServer.login(gmailUser, gmailPassword)
+  		mailServer.sendmail(gmailUser, recipient, message)
+  		mailServer.close()
 	
 	elif analyse.loudness(samps) > -30:
 		print ("Normal Ambient Sound")	
