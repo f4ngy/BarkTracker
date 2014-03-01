@@ -25,7 +25,7 @@ while True:
 	#print analyse.loudness(samps), analyse.musical_detect_pitch(samps)
 	
 	if analyse.loudness(samps) > -25:
-		print "Too Loud!"
+		print ("Too Loud!")
 		
 		#Setup email stuff
 		FROM = "BARK TRACKER" #This might need to be an email address. We will soon se
@@ -52,4 +52,4 @@ while True:
 		server.quit()
 	
 	elif analyse.loudness(samps) > -30:
-		print "Normal Ambient Sound"	
+		print ("Normal Ambient Sound")	
