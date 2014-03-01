@@ -7,7 +7,7 @@ pyaud = pyaudio.PyAudio()
 #open input stream 
 stream = pyaud.open(
 	format = pyaudio.paInt16, #16 bit
-	channels = 1, #mono
+	channels = 2, #1 = mono; 2 = stereo; I have no idea what 3+ are...
 	rate = 44100, #at 44100 Hz
 	input_device_index = 1, #whichever USB port the microphone is plugged in to
 	input = True)
