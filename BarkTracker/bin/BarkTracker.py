@@ -6,6 +6,7 @@ import smtplib # for emailing people
 import datetime
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+from multiprocessing import Process
 
 gmailUser = "barktracker@gmail.com"
 gmailPassword = "BarkBarkBark"
@@ -23,6 +24,28 @@ stream = pyaud.open(
 	input_device_index = 2, #whichever USB port the microphone is plugged in to
 	input = True)
 	
+def sendEmail():
+	
+	#Dog noisy at hour, minute, second, AM/PM
+	text = "Your dog is being noisy at " + currentTime.strftime("%Y-%m-%d %H:%M:%S")
+	message = MIMEMultipart()
+	message['Subject'] = subject
+	message['From'] = gmailUser
+	message['To'] = recipient
+	
+	mimeText = MIMEText(text, 'plain')
+	message.attach(mimeText)
+	
+	mailServer = smtplib.SMTP('smtp.gmail.com', 587)
+	mailServer.ehlo()
+	mailServer.starttls()
+	mailServer.ehlo()
+	mailServer.login(gmailUser, gmailPassword)
+	mailServer.sendmail(gmailUser, recipient, message.as_string())
+	mailServer.close()
+	
+print("Starting BarkTracker")
+	
 while True:
 	#read raw mic data
 	rawsamps = stream.read(1024)
@@ -39,25 +62,11 @@ while True:
 		if(timeDifference > datetime.timedelta(minutes=30)):
 			print ("Sending email about dog!")
 			emailSentAt = currentTime
-			#Dog noisy at hour, minute, second, AM/PM
-			text = "Your dog is being noisy at " + currentTime.strftime("%Y-%m-%d %H:%M:%S")
+			p = Process(target=sendEmail)
+			p.start()
 
-			message = MIMEMultipart()
-			message['Subject'] = subject
-			message['From'] = gmailUser
-			message['To'] = recipient
-			
-			mimeText = MIMEText(text, 'plain')
-			message.attach(mimeText)
-			
-			mailServer = smtplib.SMTP('smtp.gmail.com', 587)
-			mailServer.ehlo()
-			mailServer.starttls()
-			mailServer.ehlo()
-			mailServer.login(gmailUser, gmailPassword)
-			mailServer.sendmail(gmailUser, recipient, message.as_string())
-			mailServer.close()
 		else:
 			print ("Dog is noisy but email has already been sent")
 	#elif analyse.loudness(samps) <	 -15:
 		#print ("Normal Ambient Sound")	 
+	
