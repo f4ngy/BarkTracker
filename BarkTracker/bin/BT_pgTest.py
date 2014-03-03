@@ -4,7 +4,7 @@ import pyaudio
 import analyse
 import smtplib # for emailing people
 import datetime
-import pygame
+import audiolab
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -16,6 +16,10 @@ recipient = "recipientEmailHere"
 subject = "Noisy dog"
 emailSentAt = None
 pyaud = pyaudio.PyAudio()
+#pygame.midi.init()
+
+#open stream for pygame version
+stream = pygame.midi.read()
 
 #open input stream
 stream = pyaud.open(
@@ -28,47 +32,46 @@ input = True)
 
 def sendEmail():
 
-#Dog noisy at hour, minute, second, AM/PM
-text = "Your dog is being noisy at " + currentTime.strftime("%Y-%m-%d %H:%M:%S")
-message = MIMEMultipart()
-message['Subject'] = subject
-message['From'] = gmailUser
-message['To'] = recipient
+	#Dog noisy at hour, minute, second, AM/PM
+	text = "Your dog is being noisy at " + currentTime.strftime("%Y-%m-%d %H:%M:%S")
+	message = MIMEMultipart()
+	message['Subject'] = subject
+	message['From'] = gmailUser
+	message['To'] = recipient
 
-mimeText = MIMEText(text, 'plain')
-message.attach(mimeText)
+	mimeText = MIMEText(text, 'plain')
+	message.attach(mimeText)
 
-mailServer = smtplib.SMTP('smtp.gmail.com', 587)
-mailServer.ehlo()
-mailServer.starttls()
-mailServer.ehlo()
-mailServer.login(gmailUser, gmailPassword)
-mailServer.sendmail(gmailUser, recipient, message.as_string())
-mailServer.close()
+	mailServer = smtplib.SMTP('smtp.gmail.com', 587)
+	mailServer.ehlo()
+	mailServer.starttls()
+	mailServer.ehlo()
+	mailServer.login(gmailUser, gmailPassword)
+	mailServer.sendmail(gmailUser, recipient, message.as_string())
+	mailServer.close()
 
 print("Starting BarkTracker")
 
 while True:
-#read raw mic data
-rawsamps = stream.read(1024)
-#convert to NumPy array
-samps = numpy.fromstring(rawsamps, dtype = numpy.int16)
+	#read raw mic data
+	rawsamps = stream.read(1024)
+	#convert to NumPy array
+	samps = numpy.fromstring(rawsamps, dtype = numpy.int16)
+	
+	if analyse.loudness(samps) >= -15:
+		currentTime = datetime.datetime.now()	
+		if(emailSentAt != None):
+			timeDifference = currentTime - emailSentAt 
+		else:
+			timeDifference = datetime.timedelta(minutes=100)
+			
+		if(timeDifference > datetime.timedelta(minutes=30)):
+			print ("Sending email about dog!")
+			emailSentAt = currentTime
+			p = Process(target=sendEmail)
+			p.start()
 
-if analyse.loudness(samps) >= -15:
-currentTime = datetime.datetime.now()	
-if(emailSentAt != None):
-timeDifference = currentTime - emailSentAt
-else:
-timeDifference = datetime.timedelta(minutes=100)
-
-if(timeDifference > datetime.timedelta(minutes=30)):
-print ("Sending email about dog!")
-emailSentAt = currentTime
-p = Process(target=sendEmail)
-p.start()
-
-else:
-print ("Dog is noisy but email has already been sent")
-#elif analyse.loudness(samps) < -15:
-#print ("Normal Ambient Sound")
-
+		else:
+			print ("Dog is noisy but email has already been sent")
+	#elif analyse.loudness(samps) <	 -15:
+		#print ("Normal Ambient Sound")	 
