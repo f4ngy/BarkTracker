@@ -8,9 +8,9 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from multiprocessing import Process
 
-gmailUser = "barktracker@gmail.com"
-gmailPassword = "BarkBarkBark"
-recipient = "lle6138@rit.edu"
+gmailUser = "someGmailHere@gmail.com"
+gmailPassword = "gmailPasswordHere"
+recipient = "recipientEmailHere"
 subject = "Noisy dog"
 emailSentAt = None
 pyaud = pyaudio.PyAudio()
