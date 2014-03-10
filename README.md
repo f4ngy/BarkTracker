@@ -23,8 +23,8 @@ Installation
 - Pip install numpy
 - Pip install pyaudio, you might need to install portaudio-devel first
 - Pip install SoundAnalyse
-- Modify BarkTracker.py with your microphone, ambient noise level, and time between notiications settings
-- Run BarkTracker.py, you should start receiving e-mails
+- Modify BarkTracker.py with your microphone, ambient noise level, and time between notications settings
+- Run BarkTracker.py ("python BarkTracker.py"), you should start receiving e-mails
 
 Raspberry Pi?
 ===========
