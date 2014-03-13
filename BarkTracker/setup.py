@@ -15,13 +15,15 @@ setup(name = "BarkTracker",
     author_email = "lle6138@gmail.com and joeprezioso@comcast.net",
     url = "https://github.com/lle6138/BarkTracker",
     license =  'GPL'
+    #requirements.txt file should have version info for packaging purposes
     install_requires=
     [
-        ['numpy'],
-        ['pyaudio'],
-        ['analyse'],
-        ['smtplib']
-    ]
+        "numpy",    #numpy 1.9
+        "pyaudio",  #
+        "analyse",
+        "smtplib",
+    ],
+      
     long_description ="""Bark Tracker is an application designed for home owners, pet-owners, and
     others who want to monitor the noise level in their homes while they are away. Bark Tracker works by
     detecting noises above a certain threshold (determined by the user) through a microphone connected to
