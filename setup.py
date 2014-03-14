@@ -8,21 +8,14 @@ from distutils.core import setup
 #You could be more specific.
 #files = ["things/*"]
 
-setup(name = "BarkTracker",
+setup(
+    name = "BarkTracker",
     version = "0.1.0",
-    description = "Bark Tracker monitors and notifies you if your dog is barking while you are away.",
     author = "Lindsey Ellis and Joseph Prezioso",
     author_email = "lle6138@gmail.com and joeprezioso@comcast.net",
     url = "https://github.com/lle6138/BarkTracker",
-    license =  'GNU Affero GPL Version 3'
-    #requirements.txt file should have version info for packaging purposes
-    install_requires=
-    [
-        "numpy",        #numpy 1.9
-        "pyaudio",      #PyAudio 0.2.7
-        "SoundAnalyse"  #SoundAnalyse 0.1.1
-    ],
-      
+    license =  'GNU Affero GPL Version 3',
+    description = "Bark Tracker monitors and notifies you if your dog is barking while you are away.",
     long_description ="""Bark Tracker is an application designed for home owners, pet-owners, and
     others who want to monitor the noise level in their homes while they are away. Bark Tracker works by
     detecting noises above a certain threshold (determined by the user) through a microphone connected to
@@ -31,7 +24,16 @@ setup(name = "BarkTracker",
 
     To avoid spamming the user with countless emails over the course of a day, Bark Tracker waits 15 minutes
     (or some other amount of time, determined by the user) between emails to alert the user.
-    """
+    """,
+    #requirements.txt file should have version info for packaging purposes
+    install_requires=
+    [
+        "numpy",        #numpy 1.9
+        "pyaudio",      #PyAudio 0.2.7
+        "SoundAnalyse"  #SoundAnalyse 0.1.1
+    ],
+      
+    
     #Name the folder where your packages live:
     #(If you have other packages (dirs) or modules (py files) then
     #put them into the package directory - they will be found 
