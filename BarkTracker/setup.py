@@ -18,10 +18,9 @@ setup(name = "BarkTracker",
     #requirements.txt file should have version info for packaging purposes
     install_requires=
     [
-        "numpy",    #numpy 1.9
-        "pyaudio",  #
-        "analyse",
-        "smtplib",
+        "numpy",        #numpy 1.9
+        "pyaudio",      #PyAudio 0.2.7
+        "SoundAnalyse"  #SoundAnalyse 0.1.1
     ],
       
     long_description ="""Bark Tracker is an application designed for home owners, pet-owners, and
