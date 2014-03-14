@@ -26,6 +26,8 @@ Installation
 - Modify BarkTracker.py with your microphone, ambient noise level, and time between notications settings
 - Run BarkTracker.py ("python BarkTracker.py"), you should start receiving e-mails
 
+Alternatively, if you have Python 3 you can follow the same instructions I have listed for the Raspberry Pi setup
+
 Raspberry Pi?
 ===========
 
@@ -33,5 +35,6 @@ This application *can* be run on a Raspberry Pi but there are several requiremen
 
 - The Pi must be connected to the internet
 - You must be running Python 3 due to an issue with Linux distributions, NumPy, and Python 2.7.5
+- You will need python3-devel instead of python-devel
 - You must follow the steps linked below to get SoundAnalyse working with Python 3 http://blenderartists.org/forum/showthread.php?151392-Using-Microphone-Input-with-the-BGE&p=2562000&viewfull=1#post2562000
 - The Raspberry Pi might have issues installing numpy due to RAM, in which case you should switch to CLI and install from there.
