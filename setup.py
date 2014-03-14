@@ -14,7 +14,7 @@ setup(name = "BarkTracker",
     author = "Lindsey Ellis and Joseph Prezioso",
     author_email = "lle6138@gmail.com and joeprezioso@comcast.net",
     url = "https://github.com/lle6138/BarkTracker",
-    license =  'GPL'
+    license =  'GNU Affero GPL Version 3'
     #requirements.txt file should have version info for packaging purposes
     install_requires=
     [
