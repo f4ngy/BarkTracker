@@ -15,8 +15,20 @@ setup(
     author_email = "lle6138@gmail.com and joeprezioso@comcast.net",
     url = "https://github.com/lle6138/BarkTracker",
     license =  'GNU Affero GPL Version 3',
+<<<<<<< HEAD
     description = "Bark Tracker monitors and notifies you if your dog is barking while you are away.",
     long_description ="""Bark Tracker is an application designed for home owners, pet-owners, and
+=======
+    #requirements.txt file should have version info for packaging purposes
+    install_requires =
+    [
+        "numpy",        #numpy 1.9
+        "pyaudio",      #PyAudio 0.2.7
+        "SoundAnalyse"  #SoundAnalyse 0.1.1
+    ],
+      
+    long_description = """Bark Tracker is an application designed for home owners, pet-owners, and
+>>>>>>> 0aa551f53d420509f6f467a44c721d9ba6c8cfea
     others who want to monitor the noise level in their homes while they are away. Bark Tracker works by
     detecting noises above a certain threshold (determined by the user) through a microphone connected to
     the user's Raspberry Pi, Desktop, or Laptop. If your dog (or cat, bird, baby, rowdy brother-in-law, etc.)
